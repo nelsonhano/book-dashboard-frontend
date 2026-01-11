@@ -1,16 +1,14 @@
-import { Button, HStack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
 export default function AuthButtons() {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
+  if (isLoading) return null;
 
+  console.log(isAuthenticated);
   return (
-    <HStack>
-      {!isAuthenticated ? (
-        <Button onClick={() => loginWithRedirect()}>Login</Button>
-      ) : (
-        <Button onClick={() => logout()}>Logout</Button>
-      )}
-    </HStack>
+    <HStack>{!isAuthenticated ? <LoginButton /> : <LogoutButton />}</HStack>
   );
 }

@@ -43,7 +43,16 @@ export default function CreateBookModal() {
           <Button
             colorScheme="blue"
             loading={loading}
-            onClick={() => createBook({ variables: { name, description } })}
+            onClick={() =>
+              createBook({
+                variables: {
+                  input: {
+                    name,
+                    description,
+                  },
+                },
+              })
+            }
           >
             Save
           </Button>

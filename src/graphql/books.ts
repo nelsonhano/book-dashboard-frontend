@@ -1,7 +1,7 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_BOOKS = gql`
-  query {
+  query GetBooks {
     books {
       id
       name
@@ -10,9 +10,29 @@ export const GET_BOOKS = gql`
   }
 `;
 
+export const GET_BOOK = gql`
+  query GetBook($id: ID!) {
+    book(id: $id) {
+      id
+      name
+      description
+    }
+  }
+`;
+
 export const CREATE_BOOK = gql`
-  mutation ($name: String!, $description: String!) {
-    createBook(name: $name, description: $description) {
+  mutation CreateBook($input: CreateBookInput!) {
+    createBook(input: $input) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export const UPDATE_BOOK = gql`
+  mutation UpdateBook($id: ID!, $name: String!, $description: String!) {
+    updateBook(id: $id, name: $name, description: $description) {
       id
       name
       description
@@ -21,7 +41,10 @@ export const CREATE_BOOK = gql`
 `;
 
 export const DELETE_BOOK = gql`
-  mutation ($id: Int!) {
-    deleteBook(id: $id)
+  mutation DeleteBook($id: ID!) {
+    deleteBook(id: $id) {
+      success
+      message
+    }
   }
 `;

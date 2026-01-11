@@ -1,16 +1,21 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
-import AuthButtons from "../components/AuthButtons";
 import BookTable from "./BookTable";
+import NavBar from "./NavBar";
 
 export default function Dashboard() {
   const { isAuthenticated } = useAuth0();
-
   return (
-    <Box p={6}>
-      <Heading mb={4}>Book Dashboard</Heading>
-      <AuthButtons />
-      {isAuthenticated && <BookTable />}
-    </Box>
+    <>
+      <div>
+        <NavBar />
+        <Box p={6} w="100%">
+          <Heading mb={4}>
+            <h2>Welcome back, kindly login to get the best experience</h2>
+          </Heading>
+          {isAuthenticated && <BookTable />}
+        </Box>
+      </div>
+    </>
   );
 }
